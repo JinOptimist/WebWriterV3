@@ -1,0 +1,23 @@
+<h1>Материалист в фентези мире</h1>
+
+<div class="chapter" *ngIf="currentChapter">
+  <h2>
+    {{currentChapter.title}}
+  </h2>
+  <div>
+    {{currentChapter.body}}
+  </div>
+  <div>
+    <button *ngFor="let topic of currentChapter.topics; index as i;" (click)="GoToChapter(i)">{{topic}}</button>
+  </div>
+</div>
+
+<div class="chapter" *ngFor="let chapter of chapters">
+  <h2>
+    {{chapter.title}}
+  </h2>
+</div>
+
+
+
+
