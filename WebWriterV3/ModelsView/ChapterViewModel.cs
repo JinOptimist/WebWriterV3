@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace WebWriterV3
 {
-    public class ChapterModel
+    public class ChapterViewModel
     {
         public string Title { get; set; }
         public string Body { get; set; }

@@ -11,7 +11,7 @@ export class ReaderBookComponent {
   public currentChapter: ChapterModel;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<ChapterModel[]>(baseUrl + 'reader/All').subscribe(result => {
+    http.get<ChapterModel[]>(baseUrl + 'reader/GetAll').subscribe(result => {
       this.chapters = result;
       this.currentChapter = this.chapters[0];
     }, error => console.error(error));

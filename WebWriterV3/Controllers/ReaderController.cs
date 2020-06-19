@@ -8,23 +8,15 @@ using Microsoft.Extensions.Logging;
 namespace WebWriterV3.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class ReaderController : ControllerBase
     {
-        private readonly ILogger<ReaderController> _logger;
-
-        public ReaderController(ILogger<ReaderController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
-        [Route("All")]
-        public IEnumerable<ChapterModel> GetAll ()
+        public IEnumerable<ChapterViewModel> GetAll()
         {
-            var models = new List<ChapterModel>();
+            var models = new List<ChapterViewModel>();
 
-            models.Add(new ChapterModel()
+            models.Add(new ChapterViewModel()
             {
                 Title = "Глава 1. Спор",
                 Body = "– Вот скажи, ты же, как программист.",
@@ -32,7 +24,7 @@ namespace WebWriterV3.Controllers
                 Topics = new List<string>() { "One2", "Test2", "qwe2" }
             });
 
-            models.Add(new ChapterModel()
+            models.Add(new ChapterViewModel()
             {
                 Title = "Глава 2. Последнее желание",
                 Body = "Резкая вонь ударила в нос, но глаза открывать всё равно не хотелось.",

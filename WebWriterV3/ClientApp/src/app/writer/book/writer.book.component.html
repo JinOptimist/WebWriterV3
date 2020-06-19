@@ -1,0 +1,12 @@
+
+<div *ngIf="book">
+  <h1>
+    {{book.Name}}
+  </h1>
+  <div>
+    Name: <input [(ngModel)]="book.Name" />
+  </div>
+  <div>
+    <button (click)="Save()">Save</button>
+  </div>
+</div>
