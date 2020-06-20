@@ -11,6 +11,16 @@ namespace WebWriterV3.Controllers
     [Route("[controller]/[action]")]
     public class WriterController : ControllerBase
     {
+        public BookViewModel Load()
+        {
+            return new BookViewModel()
+            {
+                Name = "Smile 123",
+                AuthorName = "Pol"
+            };
+        }
+
+
         [HttpPost]
         public bool Save(BookViewModel bookModel)
         {

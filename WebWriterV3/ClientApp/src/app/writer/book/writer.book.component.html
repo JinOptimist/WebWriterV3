@@ -1,10 +1,10 @@
 
 <div *ngIf="book">
   <h1>
-    {{book.Name}}
+    {{book.name}}
   </h1>
   <div>
-    Name: <input [(ngModel)]="book.Name" />
+    Name: <input [(ngModel)]="book.name" />
   </div>
   <div>
     <button (click)="Save()">Save</button>

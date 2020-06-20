@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { HttpHelper } from 'src/app/helper/http.helper';
 
 @Component({
   selector: 'writer-book',
@@ -8,31 +8,19 @@ import { HttpClient } from '@angular/common/http';
 
 export class WriterBookComponent {
   public book: IBookModel;
-  private http: HttpClient;
-  private baseUrl: string;
+  public httpHelper: HttpHelper;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.book = new BookModel();
-    this.http = http;
-    this.baseUrl = baseUrl;
+  constructor(httpHelper: HttpHelper) {
+    this.httpHelper = httpHelper;
+    httpHelper
+      .Get('writer/load')
+      .subscribe(x => { this.book = x; });
   }
 
   public Save() {
-    this.http.post<IBookModel>(this.baseUrl + 'writer/save', this.book)
-      .subscribe(answer => {
-        if (answer) {
-          alert('+');
-        }
-      }, error => console.error(error));
+    this.httpHelper
+      .Post('writer/save', this.book)
+      .subscribe(x => { alert('+') });
   }
 }
 
-class BookModel implements IBookModel{
-    name: string;
-    authorName: string;
-}
-
-interface IBookModel {
-  name: string;
-  authorName: string;
-}
