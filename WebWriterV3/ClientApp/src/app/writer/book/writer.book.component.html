@@ -9,7 +9,7 @@
     <div [froalaView]="book.text"></div>
     <div>
       Name: <input [(ngModel)]="book.name" />
-      <div [froalaEditor] [(froalaModel)]="book.text">
+      <div [froalaEditor]="options" [(froalaModel)]="book.text">
         Main chapter text
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpHelper } from 'src/app/helper/http.helper';
+import FroalaEditor from 'froala-editor';
 
 @Component({
   selector: 'writer-book',
@@ -24,5 +25,11 @@ export class WriterBookComponent {
       .then(x => { console.log('2') })
       .then(x => { console.log('3') });
   }
+
+  options = {
+    toolbarButtons: ['Boom'],
+  };
+
+  
 }
 
