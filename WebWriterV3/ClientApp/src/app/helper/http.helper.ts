@@ -15,9 +15,9 @@ export class HttpHelper {
     this.baseUrl = baseUrl;
   }
 
-  public Get(url: string) {
-    var promise = this.http.get<IBookModel>(this.baseUrl + url);
-    promise.subscribe(
+  public Get<T>(url: string) : Promise<T> {
+    var promise = this.http.get<T>(this.baseUrl + url).toPromise();
+    promise.then(
       answer => { },
       error => {
         console.error(error);
@@ -25,9 +25,9 @@ export class HttpHelper {
     return promise;
   }
 
-  public Post(url: string, model: object) {
-    var promise = this.http.post<IBookModel>(this.baseUrl + url, model);
-    promise.subscribe(
+  public Post<T>(url: string, model: object): Promise<T> {
+    var promise = this.http.post<T>(this.baseUrl + url, model).toPromise();
+    promise.then(
       answer => { },
       error => {
         console.error(error);

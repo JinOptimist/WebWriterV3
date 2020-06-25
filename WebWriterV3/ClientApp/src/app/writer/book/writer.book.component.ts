@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpHelper } from 'src/app/helper/http.helper';
+import FroalaEditor from 'froala-editor';
 import { IBookModel, BookModel } from 'src/app/models/models';
 
 @Component({
@@ -14,17 +15,22 @@ export class WriterBookComponent {
   constructor(httpHelper: HttpHelper) {
     this.httpHelper = httpHelper;
 
-    //httpHelper
-    //  .Get('writer/load')
-    //  .subscribe(x => { this.book = x; });
-
-    this.book = new BookModel();
+    this.httpHelper
+      .Get<IBookModel>('writer/load')
+      .then(x => { this.book = x; });
   }
 
   public Save() {
-    this.httpHelper
-      .Post('writer/save', this.book)
-      .subscribe(x => { alert('+') });
+    this.httpHelper.Post<IBookModel>('writer/save', this.book)
+      .then(x => { console.log('1') })
+      .then(x => { console.log('2') })
+      .then(x => { console.log('3') });
   }
+
+  options = {
+    toolbarButtons: ['Boom'],
+  };
+
+  
 }
 
