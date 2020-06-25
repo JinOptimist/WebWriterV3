@@ -12,15 +12,17 @@ export class WriterBookComponent {
 
   constructor(httpHelper: HttpHelper) {
     this.httpHelper = httpHelper;
-    httpHelper
-      .Get('writer/load')
-      .subscribe(x => { this.book = x; });
+
+    this.httpHelper
+      .Get<IBookModel>('writer/load')
+      .then(x => { this.book = x; });
   }
 
   public Save() {
-    this.httpHelper
-      .Post('writer/save', this.book)
-      .subscribe(x => { alert('+') });
+    this.httpHelper.Post<IBookModel>('writer/save', this.book)
+      .then(x => { console.log('1') })
+      .then(x => { console.log('2') })
+      .then(x => { console.log('3') });
   }
 }
 
