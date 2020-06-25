@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebWriterV3.DAL.DbModel;
+using WebWriterV3.DAL.IRepository;
+using WebWriterV3.DAL.Repostory;
 
 namespace WebWriterV3.Controllers
 {
@@ -11,20 +15,27 @@ namespace WebWriterV3.Controllers
     [Route("[controller]/[action]")]
     public class WriterController : ControllerBase
     {
-        public BookViewModel Load()
+        private IBookRepository BookRepository;
+        private IMapper Mapper;
+
+        public WriterController(IBookRepository bookRepository, IMapper mapper)
         {
-            return new BookViewModel()
-            {
-                Name = "Smile 123",
-                AuthorName = "Pol"
-            };
+            BookRepository = bookRepository;
+            Mapper = mapper;
         }
 
+        public BookViewModel Load()
+        {
+            var bookModel = BookRepository.GetAll().FirstOrDefault();
+            var viewModel = Mapper.Map<BookViewModel>(bookModel);
+            return viewModel;
+        }
 
         [HttpPost]
-        public bool Save(BookViewModel bookModel)
+        public bool Save(BookViewModel bookViewModel)
         {
-            var a = bookModel.Name;
+            var bookModel = Mapper.Map<BookModel>(bookViewModel);
+            BookRepository.Save(bookModel);
             return true;
         }
     }

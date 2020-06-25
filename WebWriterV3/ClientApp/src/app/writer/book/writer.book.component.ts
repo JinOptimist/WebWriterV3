@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpHelper } from 'src/app/helper/http.helper';
+import { IBookModel, BookModel } from 'src/app/models/models';
 
 @Component({
   selector: 'writer-book',
@@ -12,9 +13,12 @@ export class WriterBookComponent {
 
   constructor(httpHelper: HttpHelper) {
     this.httpHelper = httpHelper;
-    httpHelper
-      .Get('writer/load')
-      .subscribe(x => { this.book = x; });
+
+    //httpHelper
+    //  .Get('writer/load')
+    //  .subscribe(x => { this.book = x; });
+
+    this.book = new BookModel();
   }
 
   public Save() {

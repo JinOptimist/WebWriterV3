@@ -1,9 +1,9 @@
-interface IBookModel {
+export interface IBookModel {
   name: string;
   authorName: string;
 }
 
-class BookModel implements IBookModel {
+export class BookModel implements IBookModel {
   name: string;
   authorName: string;
 }

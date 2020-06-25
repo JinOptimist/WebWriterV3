@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,7 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebWriterV3.AutoMapper;
 using WebWriterV3.DAL;
+using WebWriterV3.DAL.DbModel;
+using WebWriterV3.DAL.IRepository;
+using WebWriterV3.DAL.Repostory;
 
 namespace WebWriterV3
 {
@@ -24,6 +29,11 @@ namespace WebWriterV3
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<WebWriterContext>(x => x.UseSqlServer(connectionString));
+
+            services.AddScoped<IBookRepository>(x =>
+                new BookRepository(x.GetService<WebWriterContext>()));
+
+            services.AddSingleton<IMapper>(x => MapperBuilder.GetMapper());
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
