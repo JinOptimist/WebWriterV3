@@ -21,8 +21,8 @@ export class AppComponent {
       undo: false,
       refreshAfterCallback: true,
       callback() {
-        let text = this.html.getSelected();
-        this.html.insert(`<b>${text}*</b>`);
+        let text = this.selection.text();
+        this.html.insert(`<a href='#' class="tips">${text}</a>`);
       }
     });
   }
