@@ -27,6 +27,13 @@ namespace WebWriterV3.Controllers
         public BookViewModel Load()
         {
             var bookModel = BookRepository.GetAll().FirstOrDefault();
+            if (bookModel == null)
+            {
+                bookModel = new BookModel
+                {
+                    Name = "Материалист"
+                };
+            }
             var viewModel = Mapper.Map<BookViewModel>(bookModel);
             return viewModel;
         }

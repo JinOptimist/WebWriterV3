@@ -17,7 +17,7 @@ export class WriterBookComponent {
 
     this.httpHelper
       .Get<IBookModel>('writer/load')
-      .then(x => { this.book = x; });
+      .then(answer => { this.book = answer; });
   }
 
   public Save() {
